@@ -3,7 +3,21 @@
 import {auth} from "../../auth";
 import connectDB from "@/db/dbConnect";
 import {PostSchema} from "@/db/schema";
-import {revalidatePath} from "next/cache";
+import mongoose from "mongoose";
+const { ObjectId } = mongoose.Types;
+
+export async function getPostById(id) {
+  await connectDB();
+  const post = await PostSchema.findById(new ObjectId(id));
+  return post;
+}
+
+export async function updatePostById(id, data) {
+  const {eventType, clothingItemsInImage} = data;
+  await connectDB();
+  await PostSchema.findByIdAndUpdate(new ObjectId(id), {eventType, clothingItemsInImage});
+  console.log(`updated post: '${id}'`);
+}
 
 export async function createPost(prevState, formData) {
   const session = await auth();
@@ -20,53 +34,14 @@ export async function createPost(prevState, formData) {
   const eventType = null;
   const actualItemLinks =  null;
   await connectDB();
+
+  let post = null;
   try {
-    const posts = await PostSchema.create({posterId:posterId, title, imageUrl, content, eventType, clothingItemsInImage, actualItemLinks})
-    revalidatePath("/");
-    return { success: true, message: "Posted!", data: null };
+    post = await PostSchema.create({posterId, title, imageUrl, content, eventType, clothingItemsInImage, actualItemLinks})
+    console.log("created!", post);
+    return { success: true, message: "Posted!", data: {postId: post._id.toString()} };
   } catch (err) {
     console.log(err.message);
     return { success: false, message: err.message, data: null };
   }
-
-
-
-  // validate input
-  // if (!newStatus) {
-  //   return {
-  //     isError: true,
-  //     message: `Missing status name.`,
-  //   };
-  // }
-  //
-  // const collectionPath = 'workflowConfigs/default/statuses';
-  //
-  // // check if name already exist
-  // const q = query(
-  //   collection(db, collectionPath),
-  //   where('name', '==', newStatus)
-  // );
-  // const q_snapshot = await getDocs(q);
-  //
-  // if (!q_snapshot.empty) {
-  //   return {
-  //     isError: true,
-  //     message: `Status "${newStatus}" already exists.`,
-  //   };
-  // }
-  //
-  // // create new status
-  // await addDoc(collection(db, collectionPath), {
-  //   name: newStatus,
-  //   isEnd,
-  //   actionCount: 0,
-  //   canEdit: false,
-  // });
-  //
-  // revalidatePath('/admin/workflowConfig');
-  //
-  // return {
-  //   isError: false,
-  //   message: `Status "${newStatus}" successfully added!`,
-  // };
 }

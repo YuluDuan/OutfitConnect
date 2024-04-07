@@ -2,10 +2,6 @@ import connectDB from "@/db/dbConnect";
 import { UserSchema, ItemSchema, PostSchema } from "@/db/schema";
 import { NextResponse } from "next/server";
 
-
-
-
-
 export async function PUT(req, {params}) {
     const { id } = params;
     const {posterId, title, imageUrl, content, eventType, clothingItemsInImage, actualItemLinks} = await req.json()

@@ -24,6 +24,65 @@ export async function getPostsAction() {
     }
 }
 
+export async function getThreePosts() {
+    await connectDB();
+    try {
+        const posts = await PostSchema.find({}).limit(3);
+        return { success: true, error: null, data: posts };
+    } catch (err) {
+        return { success: false, error: err.message, data: null };
+    }
+}
+
+export async function findPostsByEventType(eventType) {
+    await connectDB();
+    try {
+        const posts = await PostSchema.find({ eventType: eventType })
+        return { success: true, error: null, data: posts };
+    } catch (err) {
+        return { success: false, error: err.message, data: null };
+    }
+}
+
+export async function findThreeTopActivities() {
+    await connectDB();
+    try {
+        const topThreeEventTypes = await PostSchema.aggregate([
+            {
+                $match: {
+                    eventType: { $ne: null }
+                }
+            },
+            
+            {
+                $group: {
+                    _id: "$eventType",
+                    count: { $sum: 1 },
+                    imageUrl: { $first: "$imageUrl" }
+                }
+            },
+            
+            {
+                $sort: { count: -1 }
+            },
+            {
+                $limit: 5
+            },
+            {
+                $project: {
+                    _id: 0,
+                    eventType: "$_id",
+                    imageUrl: 1
+                }
+            }
+        ]);
+        return { success: true, error: null, data: topThreeEventTypes };
+    } catch (err) {
+        return { success: false, error: err.message, data: null };
+    }
+}
+
+
 export async function deleteAllPostsAction() {
     await connectDB();
     try {

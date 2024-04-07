@@ -39,9 +39,6 @@ export default function CreatePostForm() {
   const [imgUrl, setImgUrl] = useState("https://placehold.co/500x500/png");
   const [imgName, setImgName] = useState("No file uploaded");
 
-
-
-  // TODO
   const [state, formAction] = useFormState(createPost, {});
 
   const form= useForm({
@@ -77,7 +74,8 @@ export default function CreatePostForm() {
     }
 
     if (state.success) {
-      router.push('/')
+      const {postId} = state.data;
+      router.push(`/posts/${postId}`)
     }
   }, [state]);
 
