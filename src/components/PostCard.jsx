@@ -23,7 +23,7 @@ const PostCard = ({title, id,  imageUrl, content}) => {
       </CardContent>
       <CardFooter className="absolute bottom-0 left-50 right-0 py-5
       ">
-          <Link href={`/post/${id}`}>
+          <Link href={`/posts/${id}`}>
           <Button>Explore the Outfits!</Button>
           </Link>
       </CardFooter>
