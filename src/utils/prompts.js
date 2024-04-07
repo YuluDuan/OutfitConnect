@@ -2,6 +2,7 @@ import {StructuredOutputParser} from 'langchain/output_parsers'
 import {PromptTemplate} from '@langchain/core/prompts'
 import z from 'zod'
 import OpenAI from "openai";
+import {getPostById, updatePostById} from "@/actions/posts";
 
 export const runtime = 'edge'
 
@@ -10,7 +11,7 @@ const openai = new OpenAI({
 });
 
 
-const parser = StructuredOutputParser.fromZodSchema(
+const visionParser = StructuredOutputParser.fromZodSchema(
   z.object({
     eventType: z
       .string()
@@ -32,8 +33,8 @@ const parser = StructuredOutputParser.fromZodSchema(
   })
 )
 
-async function getPrompt() {
-  const format_instructions = parser.getFormatInstructions()
+async function getVisionPrompt() {
+  const format_instructions = visionParser.getFormatInstructions()
 
   const prompt = new PromptTemplate({
     template:
@@ -42,12 +43,18 @@ async function getPrompt() {
     inputVariables: ['input'],
   })
 
-  return await prompt.format({input : "Who was the father of Mary Ball Washington?"})
+  return await prompt.format({input : ""})
 }
 
-export async function analyze(image_url) {
-  const prompt = await getPrompt()
-  console.log(prompt);
+export async function analyze(id, image_url) {
+  const prompt = await getVisionPrompt()
+  console.log(image_url);
+
+  const post = await getPostById(id);
+  if (post.eventType) return {
+    eventType: post.eventType,
+    clothingItemsInImage: post.clothingItemsInImage
+  }
 
   const completion = await openai.chat.completions.create({
     messages: [
@@ -72,7 +79,12 @@ export async function analyze(image_url) {
   const result = completion.choices[0].message.content;
 
   try {
-    return await parser.parse(result);
+    const res = await visionParser.parse(result);
+    console.log({res});
+    const {eventType, clothingDescriptions:clothingItemsInImage} = res;
+    console.log(id);
+    await updatePostById(id, {eventType, clothingItemsInImage})
+    return {eventType, clothingItemsInImage};
   } catch (error) {
     console.log(error)
   }
