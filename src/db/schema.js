@@ -1,10 +1,6 @@
 import mongoose, { Schema } from 'mongoose'
 
 const userSchema = new Schema({
-    auth_id: {
-        type: String,
-        required: true
-    },
     email: {
         type: String,
         required: true
@@ -33,7 +29,7 @@ const itemSchema = new Schema({
 
 const postSchema = new Schema({
     posterId: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         ref: 'UserSchema',
         default : null
     },

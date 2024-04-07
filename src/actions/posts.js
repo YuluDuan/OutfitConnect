@@ -12,7 +12,7 @@ export async function createPost(prevState, formData) {
   const title = formData.get('title');
   const content = formData.get('content');
   const imageUrl = formData.get('imageUrl');
-  const posterId = user.id;
+  const posterId = user.email;
 
   console.log({title, content, imageUrl})
 
@@ -21,7 +21,7 @@ export async function createPost(prevState, formData) {
   const actualItemLinks =  null;
   await connectDB();
   try {
-    const posts = await PostSchema.create({posterId:id, title, imageUrl, content, eventType, clothingItemsInImage, actualItemLinks})
+    const posts = await PostSchema.create({posterId:posterId, title, imageUrl, content, eventType, clothingItemsInImage, actualItemLinks})
     revalidatePath("/");
     return { success: true, message: "Posted!", data: null };
   } catch (err) {
