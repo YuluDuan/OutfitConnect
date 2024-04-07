@@ -1,6 +1,7 @@
 import "./globals.css";
 import { SessionProvider } from 'next-auth/react'
 import { auth } from '../../auth';
+import {Toaster} from "@/components/ui/toaster";
 
 import { quicksand } from "./font";
 
@@ -14,7 +15,10 @@ export default async function RootLayout({ children }) {
   return (
     <SessionProvider session={session}>
     <html lang="en">
-      <body className={quicksand.className}>{children}</body>
+      <body className={quicksand.className}>
+        {children}
+        <Toaster />
+      </body>
     </html>
     </SessionProvider>
   );

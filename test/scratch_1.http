@@ -1,0 +1,7 @@
+### Send POST request with json body
+POST http://localhost:3001/api/vision
+Content-Type: application/json
+
+{
+  "image_url": "https://utfs.io/f/bfd8cd4f-9263-4d5e-bf1f-6b21a8729d0c-d2dgkq.jpg"
+}
