@@ -9,7 +9,9 @@ export default function YourComponent() {
     useEffect(() => {
         const fetchData = async () => {
             try {
+                console.log("check");
                 const response = await getItemsAction();
+                console.log(response);
                 if (response.success) {
                     setPostData(JSON.stringify(response.data));
                 } else {
