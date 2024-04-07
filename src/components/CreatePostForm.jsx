@@ -5,14 +5,13 @@ import {useFormState, useFormStatus} from "react-dom";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import {Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
+import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
 import {Button} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import React, {useEffect, useState} from "react";
 import {Textarea} from "@/components/ui/textarea";
-import {UploadButton, UploadDropzone} from "@/utils/uploadthing";
-import {Uploader} from "@uploadthing/react";
+import {UploadButton} from "@/utils/uploadthing";
 import {createPost} from "@/actions/posts";
 import {cn} from "@/lib/utils";
 
@@ -29,7 +28,7 @@ function SubmitButton({isValid}) {
   const {pending} = useFormStatus();
 
   return (
-    <Button type='submit' >
+    <Button type='submit' disabled={!isValid || pending}>
       {(pending)? "Posting..." : "Post"}
     </Button>
   )
