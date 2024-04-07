@@ -7,6 +7,9 @@ export const {
   signIn,
   signOut,
 } = NextAuth({
+  session: {
+    jwt: true
+  },
   pages: {
     signIn: "/login",
   },
@@ -16,5 +19,21 @@ export const {
         clientSecret:process.env.GOOGLE_CLIENT_SECRET,
     })
   ],
+  callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      // console.log(user);
+      return true;
+    },
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      session.user.id = token.id;
+      return session;
+    },
+  },
   secret: process.env.NEXT_PUBLIC_SECRET
 })
