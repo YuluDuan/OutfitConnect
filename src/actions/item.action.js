@@ -1,42 +1,24 @@
 "use server"
 
-async function fetchAPI(endpoint, method = 'GET', data = null) {
-	try {
-		const options = {
-			method,
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: data ? JSON.stringify(data) : null
-		};
-
-		const response = await fetch(`http://localhost:3000/api/${endpoint}`, options);
-		if (!response.ok) {
-			throw new Error(`Failed to ${method} data from /api/${endpoint}`);
-		}
-		const responseData = await response.json();
-		return responseData;
-	} catch (error) {
-		throw error;
-	}
-}
-
+import connectDB from "@/db/dbConnect";
+import { UserSchema, ItemSchema, PostSchema } from "@/db/schema";
 
 export async function getItemsAction() {
+	await connectDB();
     try {
-        const data = await fetchAPI('items', 'GET');
-        return { success: true, error: null, data: data };
-    } catch (error) {
-        return { success: false, error: error.message, data: null };
+        const posts = await ItemSchema.find({});
+        return { success: true, error: null, data: posts };
+    } catch (err) {
+        return { success: false, error: err.message, data: null };
     }
 }
 
 export async function postItemsAction(postData) {
+    await connectDB()
     try {
-        const data = await fetchAPI('items', 'POST', postData);
-        return { success: true, error: null, data: data };
-    } catch (error) {
+        const posts = await ItemSchema.create(postData)
+        return { success: true, error: null, data: null };
+    } catch (err) {
         return { success: false, error: error.message, data: null };
     }
 }
-

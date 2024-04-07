@@ -1,46 +1,32 @@
 "use server"
 
-async function fetchAPI(endpoint, method = 'GET', data = null) {
-	try {
-		const options = {
-			method,
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: data ? JSON.stringify(data) : null
-		};
-
-		const response = await fetch(`http://localhost:3000/api/${endpoint}`, options);
-		if (!response.ok) {
-			throw new Error(`Failed to ${method} data from /api/${endpoint}`);
-		}
-		const responseData = await response.json();
-		return responseData;
-	} catch (error) {
-		throw error;
-	}
-}
+import connectDB from "@/db/dbConnect";
+import { UserSchema, ItemSchema, PostSchema } from "@/db/schema";
 
 
-export async function createPostAction(postData) {
+export async function postPostAction(postData) {
+    await connectDB()
     try {
-        const data = await fetchAPI('posts', 'POST', postData);
+        const posts = await PostSchema.create(postData)
         return { success: true, error: null, data: null };
-    } catch (error) {
+    } catch (err) {
         return { success: false, error: error.message, data: null };
     }
 }
 
 export async function getPostsAction() {
+    await connectDB();
     try {
-        const data = await fetchAPI('posts', 'GET');
-        return { success: true, error: null, data: data };
-    } catch (error) {
-        return { success: false, error: error.message, data: null };
+        const posts = await PostSchema.find({});
+        return { success: true, error: null, data: posts };
+    } catch (err) {
+        return { success: false, error: err.message, data: null };
     }
 }
 
 export async function deleteAllPostsAction() {
+
+    
     try {
         const data = await fetchAPI('posts', 'DELETE');
         return { success: true, error: null, data: null };

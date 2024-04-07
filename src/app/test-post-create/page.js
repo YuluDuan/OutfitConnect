@@ -19,7 +19,7 @@ export default function YourComponent() {
                     actualItemLinks : null
                 }
 
-                const response = await createPostAction(postData);
+                const response = await postPostAction(postData);
                 if (response.success) {
                     setPostData(JSON.stringify(response.data));
                 } else {

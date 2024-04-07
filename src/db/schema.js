@@ -30,7 +30,8 @@ const itemSchema = new Schema({
 const postSchema = new Schema({
     posterId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'UserSchema'
+        ref: 'UserSchema',
+        default : null
     },
     title: {
         type: String,
@@ -45,7 +46,8 @@ const postSchema = new Schema({
         required: true
     },
     eventType: {
-        type: String
+        type: String,
+        default : null
     }, 
     clothingItemsInImage: {
         color: String,
@@ -54,7 +56,9 @@ const postSchema = new Schema({
     }, 
     actualItemLinks: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'ItemSchema'
+        ref: 'ItemSchema',
+        default : null
+        
     }
 });
 
