@@ -14,7 +14,7 @@ import Image from "next/image"
 const PostCard = ({title, id,  imageUrl, content}) => {
   return (
     <Card className="min-h-[550px] relative py-5">
-      <CardContent className="flex flex-col gap-[10px] justify-center" >
+      <CardContent className="flex flex-col gap-[15px] justify-center" >
           <div className="overflow-hidden">
           <Image src={imageUrl} height={200} width={200} alt="hiking image" className="rounded-lg card" style={{ marginBottom: '0px' }}/>
           </div>
