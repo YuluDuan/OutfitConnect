@@ -6,6 +6,7 @@ import {ItemSchema} from "@/db/schema";
 import mongoose from "mongoose";
 const { ObjectId } = mongoose.Types;
 import Link from 'next/link'
+import { IoPricetag } from "react-icons/io5";
 
 export default async function Item({itemId}) {
   function isValidObjectId(id) {
@@ -19,7 +20,7 @@ export default async function Item({itemId}) {
 
   if (item) {
     const {url, name} = item;
-    return (<Link href={url}>{name}</Link>)
+    return (<Link href={url} className="flex flex-row justify-center items-center gap-[10px]"> <IoPricetag /> <div>{name} </div></Link>)
   }
 
   return null;

@@ -13,32 +13,31 @@ export default async function PostPage({params}) {
 
 
   return (
-    <div>
-      <Card className="w-fit">
-        <CardHeader>
-          <CardTitle>
-            {title}
-          </CardTitle>
-          <CardDescription>{content}</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className='w-[200px] h-[200px]'>
+    <div className="flex flex-row py-[50px] px-[50px] gap-[50px]">
+      <div className='w-[400px] h-[500px]'>
             <Image
               src={imageUrl}
               alt="uploadedImage"
-              width={200}
-              height={200}
+              width={400}
+              height={500}
               className={cn(
-                "h-[200px] w-[200px] object-cover transition-all hover:scale-105",
+                "h-[500px] w-[400px] object-cover rounded-lg transition-all hover:scale-105",
                 "aspect-square"
               )}
             />
-          </div>
-        </CardContent>
-      </Card>
+      </div>
+
+      <div className="flex flex-col gap-[25px] w-[450px] h-[400px]">
+
+      <h1 className="text-2xl font-bold">
+        {title}
+      </h1>
+      <p>{content}</p>
       <Suspense fallback={<Loading/>}>
         <ItemList id={id}/>
       </Suspense>
+
+      </div>
     </div>
   )
 }

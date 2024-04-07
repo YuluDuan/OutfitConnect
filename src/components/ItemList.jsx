@@ -3,6 +3,9 @@ import {getPostById} from "@/actions/posts";
 import {match} from "@/utils/matching";
 import Item from "@/components/Item";
 import ItemInImage from "@/components/ItemInImage";
+import { Badge } from "@/components/ui/badge"
+ 
+
 
 export default async function ItemList({id}) {
   function isValidObjectId(id) {
@@ -20,18 +23,18 @@ export default async function ItemList({id}) {
 
   return (
     <div>
-      <div>{`Event Type: ${eventType}`}</div>
+      <Badge className="mb-[20px]">{eventType.charAt(0).toUpperCase() + eventType.slice(1)}</Badge>
+      <div className="flex flex-row gap-5">
       <div>
-        <p>Items recognized in the image:</p>
         {
           itemsInImage.map((item, index) => <ItemInImage key={index} item={item}/>)
         }
       </div>
-      <div>
-        <p>Items that matches the items in the image:</p>
+      <div className="flex flex-col gap-[20px]">
         {
           matchedItemIds.map((id) => <Item key={id} itemId={id}/>)
         }
+      </div>
       </div>
     </div>
   )
