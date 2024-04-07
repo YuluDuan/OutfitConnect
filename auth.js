@@ -26,9 +26,9 @@ export const {
 
       try{
       await connectDB();
-      const return_user = await UserSchema.findOne({auth_id: user.id});
+      const return_user = await UserSchema.findOne({email: user.email});
       if (!return_user){
-        const new_user = await UserSchema.create({auth_id: user.id, email: user.email, name: user.name})
+        const new_user = await UserSchema.create({email: user.email, name: user.name})
         console.log({new_user});
       }
       return true;
