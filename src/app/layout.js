@@ -15,10 +15,7 @@ export default async function RootLayout({ children }) {
   return (
     <SessionProvider session={session}>
     <html lang="en">
-      <body className={inter.className}>
-        <NavBar />
-        {children}
-      </body>
+      <body className={inter.className}>{children}</body>
     </html>
     </SessionProvider>
   );
