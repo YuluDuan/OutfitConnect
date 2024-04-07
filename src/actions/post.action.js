@@ -25,10 +25,9 @@ export async function getPostsAction() {
 }
 
 export async function deleteAllPostsAction() {
-
-    
+    await connectDB();
     try {
-        const data = await fetchAPI('posts', 'DELETE');
+        await PostSchema.deleteMany({});
         return { success: true, error: null, data: null };
     } catch (error) {
         return { success: false, error: error.message, data: null };
@@ -36,19 +35,27 @@ export async function deleteAllPostsAction() {
 }
 
 export async function updatePostByIdAction(id, postData) {
+    await connectDB();
     try {
-        const data = await fetchAPI(`post/${id}`, 'PUT', postData);
-        return { success: true, error: null, data: null };
+        const updatedPost = await PostSchema.updateOne({ _id: id }, { $set: postData });
+        if (updatedPost.nModified === 0) {
+            return { success: false, error: 'Post not found', data: null };
+        }
+        return { success: true, error: null, data: updatedPost };
     } catch (error) {
         return { success: false, error: error.message, data: null };
     }
 }
 
 export async function deletePostByIdAction(id) {
+    await connectDB();
     try {
-        const data = await fetchAPI(`post/${id}`, 'DELETE');
+        const deletedPost = await PostSchema.deleteOne({ _id: id });
+        if (deletedPost.deletedCount === 0) {
+            return { success: false, error: 'Post not found', data: null };
+        }
         return { success: true, error: null, data: null };
     } catch (error) {
-        return { success: false, error: error, data: null };
+        return { success: false, error: error.message, data: null };
     }
 }

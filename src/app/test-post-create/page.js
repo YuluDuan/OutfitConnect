@@ -1,6 +1,6 @@
 "use client"
 
-import { createPostAction } from "@/actions/post.action";
+import { postPostAction } from "@/actions/post.action";
 import { useState, useEffect } from "react";
 
 export default function YourComponent() {
@@ -10,13 +10,9 @@ export default function YourComponent() {
         const fetchData = async () => {
             try {
                 const postData = {   
-                    posterId : null,
                     title : "Hello",
                     imageUrl : "an image",
                     content : "a good world",
-                    eventType : null,
-                    clothingItemsInImage : null,
-                    actualItemLinks : null
                 }
 
                 const response = await postPostAction(postData);
