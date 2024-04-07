@@ -1,10 +1,6 @@
 import mongoose, { Schema } from 'mongoose'
 
 const userSchema = new Schema({
-    auth_id: {
-        type: String,
-        required: true
-    },
     email: {
         type: String,
         required: true
@@ -34,6 +30,7 @@ const itemSchema = new Schema({
 const postSchema = new Schema({
     posterId: {
         type: String,
+        ref: 'UserSchema',
         default : null
     },
     title: {
@@ -52,16 +49,16 @@ const postSchema = new Schema({
         type: String,
         default : null
     }, 
-    clothingItemsInImage: {
+    clothingItemsInImage: [{
         color: String,
         category: String,
         features: [String]
-    }, 
-    actualItemLinks: {
+    }], 
+    actualItemLinks: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'ItemSchema',
         default : null
-    }
+    }]
 });
 
 

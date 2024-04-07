@@ -1,0 +1,65 @@
+{
+    "items" : [
+        {
+            "url" : "https://arcteryx.com/ca/en/shop/mens/cronin-pant",
+            "image_url" : "https://images-dynamic-arcteryx.imgix.net/details/1350x1710/S24-X000007700-Cronin-Pant-Arctic-Silk-Front-View.jpg?auto=format%2Ccompress&q=75&ixlib=react-9.7.0&w=450",
+            "name" : "CRONIN PANT MEN'S",
+            "description" : {
+                "color" : "White",
+                "category" : "Pants", 
+                "features" : []
+            }
+        },
+        {
+            "url" : "https://arcteryx.com/ca/en/shop/mens/sylan-pro-shoe",
+            "image_url" : "https://images-dynamic-arcteryx.imgix.net/details/1350x1710/S24-X000009024-Sylan-Pro-Shoe-Euphoria-Black-Profile.jpg?auto=format%2Ccompress&q=75&ixlib=react-9.7.0&w=450",
+            "name" : "SYLAN PRO SHOE MEN'S",
+            "description" : {
+                "color" : "Yellow",
+                "category" : "Footwear", 
+                "features" : []
+            }
+        },
+        {
+            "url" : "https://arcteryx.com/ca/en/shop/womens/kadin-hoody",
+            "image_url" : "https://images-dynamic-arcteryx.imgix.net/details/1350x1710/S24-X000007477-Kadin-Hoody-Amaranthus-Women-s-Front-View.jpg?auto=format%2Ccompress&q=75&ixlib=react-9.7.0&w=450",
+            "name" : "KADIN HOODY WOMEN'S",
+            "description" : {
+                "color" : "Pink",
+                "category" : "Jacket", 
+                "features" : []
+            }
+        },
+        {
+            "url" : "https://arcteryx.com/ca/en/shop/mantis-16-backpack",
+            "image_url" : "https://images-dynamic-arcteryx.imgix.net/details/1350x1710/S24-X000006136-Mantis-16-Backpack-Black-Front-View.jpg?auto=format%2Ccompress&q=75&ixlib=react-9.7.0&w=450",
+            "name" : "MANTIS 16 BACKPACK",
+            "description" : {
+                "color" : "Black",
+                "category" : "Backpack", 
+                "features" : []
+            }
+        },
+        {
+            "url" : "https://arcteryx.com/ca/en/shop/alpha-sl-glove",
+            "image_url" : "https://images-dynamic-arcteryx.imgix.net/details/1350x1710/F23-X000006512-Alpha-SL-Glove-Black-Front.jpg?auto=format%2Ccompress&q=75&ixlib=react-9.7.0&w=450",
+            "name" : "ALPHA SL GLOVE",
+            "description" : {
+                "color" : "Black",
+                "category" : "Glove", 
+                "features" : []
+            }
+        },
+        {
+            "url" : "https://arcteryx.com/ca/en/shop/womens/squamish-hoody",
+            "image_url" : "https://images-dynamic-arcteryx.imgix.net/details/1350x1710/F23-X000006946-Squamish-Hoody-Atmos-Women-s-Front-View.jpg?auto=format%2Ccompress&q=75&ixlib=react-9.7.0&w=450",
+            "name" : "SQUAMISH HOODY WOMEN'S",
+            "description" : {
+                "color" : "White",
+                "category" : "Hoody", 
+                "features" : []
+            }
+        }
+    ]
+}
+

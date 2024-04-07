@@ -26,7 +26,7 @@ export async function createPost(prevState, formData) {
   const title = formData.get('title');
   const content = formData.get('content');
   const imageUrl = formData.get('imageUrl');
-  const posterId = user.id;
+  const posterId = user.email;
 
   console.log({title, content, imageUrl})
 

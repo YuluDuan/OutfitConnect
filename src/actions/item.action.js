@@ -19,6 +19,16 @@ export async function postItemsAction(postData) {
         const posts = await ItemSchema.create(postData)
         return { success: true, error: null, data: null };
     } catch (err) {
-        return { success: false, error: error.message, data: null };
+        return { success: false, error: err.message, data: null };
+    }
+}
+
+export async function deleteItemsAction(postData) {
+    await connectDB()
+    try {
+        const posts = await ItemSchema.deleteMany({})
+        return { success: true, error: null, data: null };
+    } catch (err) {
+        return { success: false, error: err.message, data: null };
     }
 }
