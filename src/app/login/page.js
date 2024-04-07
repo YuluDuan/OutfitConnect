@@ -24,7 +24,7 @@ export default function Login(){
    <div className="w-1/2 h-screen flex items-center justify-center bg-img relative">
    <img class="background" src="/assets/bg-image.jpg" alt="Background Image"/>
       <nav className="absolute top-0 left-0 right-0 z-50 flex flex-col items-end py-12 px-12">
-        <Button onClick={() => signIn("google")}>Login</Button>
+        <Button onClick={() => signIn("google",  {callbackUrl: '/'})}>Login</Button>
       </nav>
 
 
@@ -40,7 +40,7 @@ export default function Login(){
         size="lg"
         className="w-1/2"
         variant="outline"
-        onClick={() => signIn("google")}
+        onClick={() => signIn("google", {callbackUrl: '/'})}
       >
         <FcGoogle className="h-5 w-5" />
       </Button>
