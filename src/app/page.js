@@ -3,12 +3,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { days_one } from "@/app/font";
 import {auth, signIn, signOut} from "../../auth";
+import PhotoGallery3 from "@/components/PhotoGallery3"
+import BrowseActivities from "@/components/BrowseActivities"
 
 
 export default async function LandingPage () {
   const session =  await auth();
   return (
-    <section className="flex flex-col">
+    <section className="flex flex-col w-full h-full items-center">
       <nav
       className={`flex justify-between py-5 pb-2 px-12 items-center border-b border-gray-100 fixed top-0 left-0 right-0 bg-white z-50`}
     >
@@ -39,6 +41,8 @@ export default async function LandingPage () {
         
       </div>
     </nav>
+      <PhotoGallery3/>
+      <BrowseActivities/>
     </section>
   );
 };
