@@ -53,16 +53,16 @@ const postSchema = new Schema({
         type: String,
         default : null
     }, 
-    clothingItemsInImage: {
+    clothingItemsInImage: [{
         color: String,
         category: String,
         features: [String]
-    }, 
-    actualItemLinks: {
+    }], 
+    actualItemLinks: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'ItemSchema',
         default : null
-    }
+    }]
 });
 
 
