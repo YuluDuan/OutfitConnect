@@ -75,6 +75,17 @@
     }
   }
   
+  .purple_text_gradient{
+    @apply bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 text-transparent bg-clip-text;
+  }
+
+  .start-btn{
+    border-radius: 30px;
+    background: linear-gradient(88deg, #EC74E7 -45.12%, #8468F5 74.37%);
+    width: 150px;
+    font-size: 15px;
+    font-weight:700;
+  }
   
   .background {
     position: absolute;

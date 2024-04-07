@@ -11,7 +11,7 @@ export default function Login(){
     <div className="flex flex-row">
     <div className="w-1/2 h-screen flex flex-col justify-center items-center px-12">
       <Image  
-          src="/assets/Logo.svg"
+          src="/assets/dog-text.png"
           height={250}
           width={250}
           alt="logo"/>

@@ -1,9 +1,8 @@
-import { Inter } from "next/font/google";
 import "./globals.css";
 import { SessionProvider } from 'next-auth/react'
 import { auth } from '../../auth';
 
-const inter = Inter({ subsets: ["latin"] });
+import { quicksand } from "./font";
 
 export const metadata = {
   title: "Create Next App",
@@ -15,7 +14,7 @@ export default async function RootLayout({ children }) {
   return (
     <SessionProvider session={session}>
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={quicksand.className}>{children}</body>
     </html>
     </SessionProvider>
   );
