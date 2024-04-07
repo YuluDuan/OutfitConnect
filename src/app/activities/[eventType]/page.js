@@ -5,8 +5,6 @@ import PostCard from "@/components/PostCard";
 const page =  async ( { params } ) => {
 
 const posts = await findPostsByEventType(decodeURIComponent(params.eventType));
-console.log(posts.data);
-console.log({ params });
 
 
   return (
