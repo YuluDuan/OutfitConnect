@@ -20,8 +20,7 @@ const LandingPageHeader = async () => {
 
     <div className="hidden lg:flex gap-x-14 leading-5 py-3 text-base font-medium">
       <Link href="/">Explore</Link>
-      <Link href="/">Community</Link>
-      <Link href="/">About</Link>
+      <Link href="/posts/new">Post</Link>
     </div>
 
 

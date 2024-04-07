@@ -13,21 +13,21 @@ import Image from "next/image"
 
 const PostCard = ({title, id,  imageUrl, content}) => {
   return (
-    <Card className="min-h-[500px] relative py-5">
-    <CardContent className="flex flex-col gap-[20px] justify-center">
-        <div className="overflow-hidden">
-        <Image src={imageUrl} height={200} width={200} alt="hiking image" className="rounded-lg card"/>
-        </div>
-        <CardTitle>{title}</CardTitle>
-      <p>{content}</p>
-    </CardContent>
-    <CardFooter className="absolute bottom-0 right-2">
-        <Link href={`/post/${id}`}>
-        <Button>Explore the Outfits!</Button>
-        </Link>
-        
-    </CardFooter>
-  </Card>
+    <Card className="min-h-[550px] relative py-5">
+      <CardContent className="flex flex-col gap-[10px] justify-center" >
+          <div className="overflow-hidden">
+          <Image src={imageUrl} height={200} width={200} alt="hiking image" className="rounded-lg card" style={{ marginBottom: '0px' }}/>
+          </div>
+          <CardTitle>{title}</CardTitle>
+        <p>{content}</p>
+      </CardContent>
+      <CardFooter className="absolute bottom-0 left-50 right-0 py-5
+      ">
+          <Link href={`/post/${id}`}>
+          <Button>Explore the Outfits!</Button>
+          </Link>
+      </CardFooter>
+    </Card>
   
   )
 }
