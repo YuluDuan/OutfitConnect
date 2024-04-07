@@ -1,3 +1,5 @@
+import connectDB from "@/db/dbConnect";
+import { UserSchema } from "@/db/schema";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
@@ -20,9 +22,21 @@ export const {
     })
   ],
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
-      // console.log(user);
+    async signIn({ user, account, profile, email }) {
+
+      try{
+      await connectDB();
+      const return_user = await UserSchema.findOne({auth_id: user.id});
+      if (!return_user){
+        const new_user = await UserSchema.create({auth_id: user.id, email: user.email, name: user.name})
+        console.log({new_user});
+      }
       return true;
+    }catch (error){
+      console.log(error);
+      return false;
+    }
+      
     },
     async jwt({ token, user }) {
       if (user) {
