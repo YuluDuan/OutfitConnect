@@ -14,29 +14,32 @@ import {Textarea} from "@/components/ui/textarea";
 import {UploadButton} from "@/utils/uploadthing";
 import {createPost} from "@/actions/posts";
 import {cn} from "@/lib/utils";
+import {useRouter} from "next/navigation";
 
 const postFormSchema = z.object({
   title: z
     .string({required_error: "Title must not be empty."}).min(1, "Title must not be empty."),
-  imageUrl: z
-    .string().url(),
   content: z
     .string()
 })
 
-function SubmitButton({isValid}) {
+function SubmitButton({isValid, imgUploaded}) {
   const {pending} = useFormStatus();
-
+  const ok = isValid && imgUploaded
   return (
-    <Button type='submit' disabled={!isValid || pending}>
+    <Button type='submit' disabled={!ok || pending }>
       {(pending)? "Posting..." : "Post"}
     </Button>
   )
 }
 
 export default function CreatePostForm() {
+  const router = useRouter();
+  const [imgUploaded, setImageUploaded] = useState(false);
   const [imgUrl, setImgUrl] = useState("https://placehold.co/500x500/png");
   const [imgName, setImgName] = useState("No file uploaded");
+
+
 
   // TODO
   const [state, formAction] = useFormState(createPost, {});
@@ -53,6 +56,7 @@ export default function CreatePostForm() {
     document.getElementById("imageUrl").value = url;
     setImgUrl(url);
     setImgName(name);
+    setImageUploaded(true);
   }
 
   const onUploadError = (error) => {
@@ -64,14 +68,18 @@ export default function CreatePostForm() {
     console.log("Uploading: ", name);
   }
 
-  // useEffect(() => {
-  //   if (state?.message) {
-  //     toast({
-  //       variant: state?.isError ? "destructive" : "default",
-  //       title: state?.message
-  //     })
-  //   }
-  // }, [state]);
+  useEffect(() => {
+    if (state?.message) {
+      toast({
+        variant: state?.success ? "default" : "destructive",
+        title:  state?.message
+      })
+    }
+
+    if (state.success) {
+      router.push('/')
+    }
+  }, [state]);
 
   return (
       <Form {...form}>
@@ -134,7 +142,7 @@ export default function CreatePostForm() {
                   </FormItem>
                 )}
               />
-              <SubmitButton isValid={isValid}/>
+              <SubmitButton isValid={isValid} imgUploaded={imgUploaded}/>
             </div>
           </div>
         </form>
