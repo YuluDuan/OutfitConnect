@@ -16,7 +16,7 @@ const LandingPageHeader = () => {
         className={`flex gap-2 items-center text-2xl leading-normal orange_gradient cursor-default ${days_one.className} gap-5`}
       >
         <Image src={"/assets/dog.png"} height={120} width={120} alt="Logo" />
-        DOG'TERXY
+        {"DOG'TERXY"}
       </div>
 
       {/* Desktop Menu */}

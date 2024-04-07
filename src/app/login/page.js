@@ -22,7 +22,7 @@ export default function Login(){
     </div>
   
    <div className="w-1/2 h-screen flex items-center justify-center bg-img relative">
-   <img class="background" src="/assets/bg-image.jpg" alt="Background Image"/>
+   <Image className="background" src="/assets/bg-image.jpg" alt="Background Image" height={100} width={100}/>
       <nav className="absolute top-0 left-0 right-0 z-50 flex flex-col items-end py-12 px-12">
         <Button onClick={() => signIn("google",  {callbackUrl: '/'})}>Login</Button>
       </nav>
