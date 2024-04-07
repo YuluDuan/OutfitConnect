@@ -33,8 +33,7 @@ const itemSchema = new Schema({
 
 const postSchema = new Schema({
     posterId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'UserSchema',
+        type: String,
         default : null
     },
     title: {

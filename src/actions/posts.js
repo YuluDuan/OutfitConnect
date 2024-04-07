@@ -21,7 +21,7 @@ export async function createPost(prevState, formData) {
   const actualItemLinks =  null;
   await connectDB();
   try {
-    const posts = await PostSchema.create({posterId:id, title, imageUrl, content, eventType, clothingItemsInImage, actualItemLinks})
+    const posts = await PostSchema.create({posterId, title, imageUrl, content, eventType, clothingItemsInImage, actualItemLinks})
     revalidatePath("/");
     return { success: true, message: "Posted!", data: null };
   } catch (err) {
@@ -29,44 +29,4 @@ export async function createPost(prevState, formData) {
     return { success: false, message: err.message, data: null };
   }
 
-
-
-  // validate input
-  // if (!newStatus) {
-  //   return {
-  //     isError: true,
-  //     message: `Missing status name.`,
-  //   };
-  // }
-  //
-  // const collectionPath = 'workflowConfigs/default/statuses';
-  //
-  // // check if name already exist
-  // const q = query(
-  //   collection(db, collectionPath),
-  //   where('name', '==', newStatus)
-  // );
-  // const q_snapshot = await getDocs(q);
-  //
-  // if (!q_snapshot.empty) {
-  //   return {
-  //     isError: true,
-  //     message: `Status "${newStatus}" already exists.`,
-  //   };
-  // }
-  //
-  // // create new status
-  // await addDoc(collection(db, collectionPath), {
-  //   name: newStatus,
-  //   isEnd,
-  //   actionCount: 0,
-  //   canEdit: false,
-  // });
-  //
-  // revalidatePath('/admin/workflowConfig');
-  //
-  // return {
-  //   isError: false,
-  //   message: `Status "${newStatus}" successfully added!`,
-  // };
 }
