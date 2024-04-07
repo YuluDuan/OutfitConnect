@@ -1,8 +1,8 @@
-import { Button } from "./ui/button";
 import Link from "next/link";
 import Image from "next/image";
 import { days_one } from "@/app/font";
 import {auth, signIn, signOut} from "../../auth";
+import SignOut from "./SignOut";
 
 
 const LandingPageHeader = async () => {
@@ -42,18 +42,3 @@ const LandingPageHeader = async () => {
 };
 
 export default LandingPageHeader;
-
-const SignOut = () =>{
-  return (
-    <form action={async() => {
-      "use server"
-      await signOut()
-    }}>
-
-       <Button className="purple_gradient">
-         SignOut
-        </Button>   
-
-    </form>
-  )
-}
