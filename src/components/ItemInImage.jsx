@@ -20,7 +20,7 @@ export default async function ItemInImage({item}) {
 
   if (item) {
     return (
-      <div className="w-[250px] h-[40px] bg-red-100 rounded-lg mb-[20px] text-center py-2">
+      <div className="w-[250px] bg-red-100 rounded-lg mb-[20px] text-center py-2">
         <div className="text-center">{`${color} ${category} with ${featureString}`}</div>
       </div>
     )
