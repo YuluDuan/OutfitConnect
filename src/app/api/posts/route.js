@@ -14,11 +14,23 @@ export async function GET(req) {
 }
 
 export async function POST(req) {
-    const {posterId, title, imageUrl, content, eventType, clothingItemsInImage_temp, actualItemLinks} = await req.json()
-    const clothingItemsInImage = clothingItemsInImage_temp ? { color, category, features } : null;
+    const { id } = params;
+    const {posterId, title, imageUrl, content, eventType, clothingItemsInImage, actualItemLinks} = await req.json()
+    let clothingItemsInImage_Array = null;
+    let actualItemLinks_Array = null;
+    if (Array.isArray(clothingItemsInImage)) {
+        clothingItemsInImage_Array = clothingItemsInImage.map(item => ({
+            color: item.color,
+            category: item.category,
+            features: item.features
+        }));
+    }
+    if (Array.isArray(actualItemLinks)) {
+        actualItemLinks_Array = actualItemLinks.map(link => link);
+    }
     await connectDB()
     try {
-        const posts = await PostSchema.create({posterId, title, imageUrl, content, eventType, clothingItemsInImage, actualItemLinks})
+        const posts = await PostSchema.create({posterId, title, imageUrl, content, eventType, clothingItemsInImage_Array, actualItemLinks_Array})
         return NextResponse.json({message : "post created."}, {status : 200})
     } catch (err) {
         return NextResponse.json({ message: "Error POST:", error: err.message }, { status: 500 });

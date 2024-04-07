@@ -8,16 +8,26 @@ import { NextResponse } from "next/server";
 
 export async function PUT(req, {params}) {
     const { id } = params;
-    const {posterId, title, imageUrl, content, eventType, clothingItemsInImage_temp, actualItemLinks} = await req.json()
-    const clothingItemsInImage = clothingItemsInImage_temp ? { color, category, features } : null;
+    const {posterId, title, imageUrl, content, eventType, clothingItemsInImage, actualItemLinks} = await req.json()
+    let clothingItemsInImage_Array = null;
+    let actualItemLinks_Array = null;
+    if (Array.isArray(clothingItemsInImage)) {
+        clothingItemsInImage_Array = clothingItemsInImage.map(item => ({
+            color: item.color,
+            category: item.category,
+            features: item.features
+        }));
+    }
+    if (Array.isArray(actualItemLinks)) {
+        actualItemLinks_Array = actualItemLinks.map(link => link);
+    }
     await connectDB();
-    await PostSchema.findByIdAndUpdate(id, {posterId, title, imageUrl, content, eventType, clothingItemsInImage, actualItemLinks});
+    await PostSchema.findByIdAndUpdate(id, {posterId, title, imageUrl, content, eventType, clothingItemsInImage_Array, actualItemLinks});
     return NextResponse.json({ message: "Post updated." }, {status : 200});
 }
 
 export async function DELETE(req, {params}) {
     const { id } = params;
-    // console.log(id)
     await connectDB();
 
     try {
