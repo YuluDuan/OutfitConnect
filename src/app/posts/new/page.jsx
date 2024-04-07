@@ -2,7 +2,7 @@ import CreatePostForm from "@/components/CreatePostForm";
 
 export default function NewPostPage() {
   return(
-    <div className="flex">
+    <div className="flex pt-[160px]">
       <div className="w-8/12 mx-auto">
         <h1 className="text-4xl font-bold px-6 py-10">Post your adventure!</h1>
         <div className="text-4xl px-6">
