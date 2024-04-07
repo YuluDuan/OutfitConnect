@@ -34,6 +34,16 @@ export async function getThreePosts() {
     }
 }
 
+export async function findPostsByEventType(eventType) {
+    await connectDB();
+    try {
+        const posts = await PostSchema.find({ eventType: eventType })
+        return { success: true, error: null, data: posts };
+    } catch (err) {
+        return { success: false, error: err.message, data: null };
+    }
+}
+
 export async function findThreeTopActivities() {
     await connectDB();
     try {
@@ -56,7 +66,7 @@ export async function findThreeTopActivities() {
                 $sort: { count: -1 }
             },
             {
-                $limit: 3
+                $limit: 5
             },
             {
                 $project: {
