@@ -8,13 +8,17 @@ const { ObjectId } = mongoose.Types;
 import Link from 'next/link'
 
 export default async function Item({itemId}) {
+  function isValidObjectId(id) {
+    return /^[0-9a-fA-F]{24}$/.test(id);
+  }
+
+  if (!isValidObjectId(itemId)) return null;
+
   await connectDB();
   const item = await ItemSchema.findById(new ObjectId(itemId));
-  const {url, name} = item;
-
-  console.log(item);
 
   if (item) {
+    const {url, name} = item;
     return (<Link href={url}>{name}</Link>)
   }
 

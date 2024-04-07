@@ -10,9 +10,6 @@ import Link from 'next/link'
 export default async function ItemInImage({item}) {
   const {color, category, features} = item;
 
-  console.log("MYITEM");
-  console.log({item});
-
   if (item) {
     return (
       <div>

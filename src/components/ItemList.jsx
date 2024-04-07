@@ -5,12 +5,17 @@ import Item from "@/components/Item";
 import ItemInImage from "@/components/ItemInImage";
 
 export default async function ItemList({id}) {
+  function isValidObjectId(id) {
+    return /^[0-9a-fA-F]{24}$/.test(id);
+  }
+
+  if (!isValidObjectId(id)) return null;
+
   const post = await getPostById(id);
   const {eventType, clothingItemsInImage} = await analyze(id, post.imageUrl);
   const matchedItemIds = await match(clothingItemsInImage) || [];
 
-  const itemsInImage = JSON.parse(JSON.stringify(clothingItemsInImage));
-  console.log("itemsInImage")
+  const itemsInImage =clothingItemsInImage;
   console.log(itemsInImage)
 
   return (
