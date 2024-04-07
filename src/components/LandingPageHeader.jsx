@@ -9,7 +9,7 @@ const LandingPageHeader = async () => {
   const session =  await auth();
   return (
     <nav
-    className={`flex justify-between py-5 pb-2 px-12 items-center border-b border-gray-100 fixed top-0 left-0 right-0 bg-white z-50`}
+    className={`flex justify-between py-2 pb-2 px-12 items-center border-b border-gray-100 fixed top-0 left-0 right-0 bg-white z-50`}
   >
     <div
       className={`flex gap-2 items-center text-2xl leading-normal orange_gradient cursor-default ${days_one.className} gap-5`}
